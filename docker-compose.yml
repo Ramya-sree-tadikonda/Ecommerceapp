@@ -1,0 +1,52 @@
+version: "3.9"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: ecommerce-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootuser
+      MYSQL_DATABASE: ecommerce_auth          # DB name
+      MYSQL_USER: root             # ✅ normal user, NOT root
+      MYSQL_PASSWORD: rootuser         # password for ecommerce_user
+    ports:
+      - "3307:3306"                           # host:container
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      # 👇 point this to your real backend folder name (NO space)
+      context: ./ecommerceapplication
+      dockerfile: Dockerfile
+    container_name: ecommerce-backend
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "9091:9091"
+
+  frontend:
+    build:
+      # 👇 point this to your React/Vite folder
+      context: ./ecommerce-ui
+      dockerfile: Dockerfile
+    container_name: ecommerce-frontend
+    depends_on:
+      - backend
+    ports:
+      - "5176:80"
+    environment:
+      # This value is baked into the Vite build.
+      # Browser will call http://localhost:9091 -> mapped to backend.
+      VITE_API_BASE_URL: http://localhost:9091
+
+volumes:
+  mysql_data:

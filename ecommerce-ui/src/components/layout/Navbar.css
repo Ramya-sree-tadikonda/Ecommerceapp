@@ -1,0 +1,134 @@
+/* src/components/layout/Navbar.css */
+
+.nav-root {
+  height: 60px;
+  padding: 0.5rem 2rem;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffffcc;
+  backdrop-filter: blur(4px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Left side */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-logo {
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: #222;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.nav-link:hover {
+  color: #007bff;
+}
+
+/* Right side */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Search bar with animation */
+.nav-search-wrapper {
+  position: relative;
+}
+
+.nav-search-input {
+  padding: 0.3rem 0.6rem;
+  border-radius: 16px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+  width: 140px;
+  transition: width 0.25s ease, box-shadow 0.25s ease;
+}
+
+.nav-search-input:focus {
+  outline: none;
+  width: 220px;              /* animation: expands on focus */
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+/* Auth links */
+.nav-auth {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.nav-logout-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #d9534f;
+  font-size: 0.95rem;
+}
+
+.nav-logout-btn:hover {
+  text-decoration: underline;
+}
+
+/* Hamburger menu for mobile */
+.nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-burger-line {
+  width: 18px;
+  height: 2px;
+  background-color: #333;
+  display: block;
+}
+
+/* -------- Responsive (mobile) -------- */
+@media (max-width: 768px) {
+  .nav-links,
+  .nav-auth {
+    display: none;
+  }
+
+  .nav-links-open,
+  .nav-auth-open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 1.5rem;
+    top: 60px;
+    background: #fff;
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    gap: 0.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  .nav-burger {
+    display: flex;
+  }
+}
