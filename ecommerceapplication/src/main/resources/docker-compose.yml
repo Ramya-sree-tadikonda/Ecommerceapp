@@ -48,5 +48,7 @@ services:
       # Browser will call http://localhost:9091 -> mapped to backend.
       VITE_API_BASE_URL: http://localhost:9091
 
+      environment: STRIPE_SECRET_KEY=sk_test_51RLaabQS3y6KOaL6Tv0ONdoPuv6ciwsbDenGdjyk7T8V1qBpAlr3OkhVO1s7PrRML8eiLdNsT8cZXsyT9CfajHKS00nuGD1YJp
+
 volumes:
   mysql_data:
