@@ -10,7 +10,12 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.notNullValue;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+import org.springframework.test.context.ActiveProfiles;
+
+
+
+@ActiveProfiles("test")
+@SpringBootTest
 class ProductApiTest {
 
     @LocalServerPort
@@ -32,3 +37,4 @@ class ProductApiTest {
                 .body(notNullValue());
     }
 }
+
