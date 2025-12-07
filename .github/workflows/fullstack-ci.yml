@@ -42,6 +42,11 @@ jobs:
       - name: Build JAR (skip tests here to avoid duplicate)
         run: mvn -q -B package -DskipTests
 
+        # NEW:builds backend Docker image and push to aws ecr 
+      - name: Build Backend Docker Image
+        run: docker build -t ecommerce-backend:ci .
+
+
   frontend-ci:
     name: Frontend (Vite) CI
     runs-on: ubuntu-latest
