@@ -1,4 +1,4 @@
-// src/router/AppRouter.jsx
+
 import { Routes, Route } from "react-router-dom";
 
 import HomePage from "../pages/catalog/HomePage.jsx";

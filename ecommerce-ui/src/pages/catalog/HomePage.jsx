@@ -1,4 +1,4 @@
-// src/pages/catalog/HomePage.jsx
+
 import "./HomePage.css";
 
 export default function HomePage() {

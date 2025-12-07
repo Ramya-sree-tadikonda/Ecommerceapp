@@ -28,7 +28,6 @@ class ProductApiTest {
 
     @BeforeEach
     void setup() {
-        // Clean DB before each test
         productRepository.deleteAll();
     }
 
@@ -68,7 +67,6 @@ class ProductApiTest {
 
     @Test
     void getProductById_returnsProduct() throws Exception {
-        // Arrange: save one product and use its generated ID
         Product saved = productRepository.save(
                 Product.builder()
                         .name("Headphones")
@@ -81,7 +79,7 @@ class ProductApiTest {
 
         Long id = saved.getId();
 
-        // Act + Assert
+
         mockMvc.perform(
                         get("/api/products/{id}", id)
                 )
@@ -94,7 +92,6 @@ class ProductApiTest {
 
     @Test
     void getProductById_returns404_whenNotFound() throws Exception {
-        // No product with ID 999 in fresh H2 DB
         mockMvc.perform(
                         get("/api/products/{id}", 999L)
                 )

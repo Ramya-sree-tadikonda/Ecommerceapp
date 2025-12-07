@@ -1,4 +1,4 @@
-// src/pages/admin/AdminSignupPage.jsx
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { adminSignupApi } from "../../api/authApi.js";

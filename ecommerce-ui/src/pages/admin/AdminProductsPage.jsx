@@ -1,4 +1,4 @@
-// src/pages/admin/AdminProductsPage.jsx
+
 import { useEffect, useState } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 import {
@@ -25,7 +25,7 @@ export default function AdminProductsPage() {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
-  // 🔹 Pagination + search state
+  // Pagination + search state
   const [page, setPage] = useState(0); // 0-based
   const [size] = useState(20);
   const [totalPages, setTotalPages] = useState(0);
@@ -57,7 +57,7 @@ export default function AdminProductsPage() {
 
   useEffect(() => {
     loadProducts(0, "");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  
   }, []);
 
   const handleChange = (e) => {
@@ -177,7 +177,7 @@ export default function AdminProductsPage() {
           <a href="/admin/products" style={{ marginRight: "1rem" }}>
             Products
           </a>
-          {/* later you can add /admin/orders, /admin/cart, etc. */}
+          {/* later add /admin/orders, /admin/cart, etc. */}
         </div>
       </div>
 

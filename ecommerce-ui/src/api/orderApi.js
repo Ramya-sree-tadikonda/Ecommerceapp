@@ -1,4 +1,4 @@
-// src/api/orderApi.js
+
 
 // USER: get own orders (with sort)
 export function getOrdersApi(axiosPrivate, sort = "desc") {

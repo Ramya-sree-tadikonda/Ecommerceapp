@@ -1,4 +1,4 @@
-// src/pages/checkout/CheckoutPage.jsx
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";

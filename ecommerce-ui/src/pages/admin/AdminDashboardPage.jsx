@@ -1,4 +1,4 @@
-// src/pages/admin/AdminDashboardPage.jsx
+
 import { useEffect, useState } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 import { getAdminStatsApi } from "../../api/adminStatsApi.js";

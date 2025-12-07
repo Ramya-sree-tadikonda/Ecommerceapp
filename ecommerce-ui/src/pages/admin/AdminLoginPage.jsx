@@ -1,4 +1,4 @@
-// src/pages/admin/AdminLoginPage.jsx
+
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { adminLoginApi } from "../../api/authApi.js";
@@ -26,7 +26,7 @@ export default function AdminLoginPage() {
 
     const username = form.username.trim();
 
-    // enforce naming rule
+ 
     if (!username.endsWith("_admin")) {
       setError("Admin username must end with '_admin'.");
       return;

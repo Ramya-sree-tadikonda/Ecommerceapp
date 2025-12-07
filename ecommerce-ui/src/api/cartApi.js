@@ -1,4 +1,4 @@
-// src/api/cartApi.js
+
 
 // Get current user's cart
 export function getCartApi(axiosPrivate) {

@@ -1,4 +1,4 @@
-// src/layouts/AdminLayout.jsx
+
 import { Link, NavLink, Outlet } from "react-router-dom";
 
 export default function AdminLayout() {

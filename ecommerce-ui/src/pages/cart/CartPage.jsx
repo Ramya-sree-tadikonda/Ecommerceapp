@@ -1,4 +1,4 @@
-// src/pages/cart/CartPage.jsx
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";

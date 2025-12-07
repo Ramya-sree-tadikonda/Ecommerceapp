@@ -12,7 +12,7 @@ export default function ProtectedRoute({ children, requiredRole }) {
 
   // if route requires a specific role (e.g., ADMIN)
   if (requiredRole && auth?.user?.role !== requiredRole) {
-    // you can redirect to home or show a 403 page
+    // redirect to home or show a 403 page
     return <Navigate to="/" replace />;
   }
 

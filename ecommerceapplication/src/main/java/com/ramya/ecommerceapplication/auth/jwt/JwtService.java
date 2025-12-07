@@ -18,7 +18,7 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    // For learning only. In real apps, move this to config / env variable.
+    // In real apps, move this to config / env variable.
     private static final String SECRET_KEY = "8Lxqa6gdbtj09HXHG71cKVSwtsGHBGkWGo2kPIeJQQQ=";
 
     // 15 minutes access token

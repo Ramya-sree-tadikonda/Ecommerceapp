@@ -48,7 +48,7 @@ public class AuthService {
 
 
 
-        // ⭐ Simple rule: if fullName ends with "_admin" → ADMIN, else USER
+        // Simple rule: if fullName ends with "_admin" → ADMIN, else USER
         Role role = Role.USER;
         if (request.getFullName() != null &&
                 request.getFullName().toLowerCase().endsWith("_admin")) {
@@ -81,7 +81,7 @@ public class AuthService {
                 ", otp = " + user.getOtp() +
                 ", otpExpiry = " + user.getOtpExpiry());
 
-        // 5. ✅ Send OTP email
+        // 5. Send OTP email
         emailService.sendOtpEmail(user.getEmail(), otp);
 
         return "User registered successfully. Please verify your email with the OTP sent.";
@@ -178,7 +178,7 @@ public class AuthService {
                       "User not found for this email"
               ));
 
-      // 🔑 Generate reset token (not OTP now)
+      //  Generate reset token (not OTP now)
       String token = java.util.UUID.randomUUID().toString();
       LocalDateTime expiry = LocalDateTime.now().plusMinutes(30);
 

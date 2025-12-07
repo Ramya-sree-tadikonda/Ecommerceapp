@@ -1,4 +1,4 @@
-// src/components/layout/Navbar.jsx
+
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth.jsx";
 import "./Navbar.css";
@@ -30,7 +30,7 @@ export default function Navbar() {
           </>
         )}
 
-        {/* ✅ Always-visible Admin hyperlink for admin panel */}
+        {/* Always-visible Admin hyperlink for admin panel */}
         <Link to="/admin" className="nav-link">
           Admin
         </Link>

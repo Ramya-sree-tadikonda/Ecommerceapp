@@ -1,4 +1,4 @@
-// src/api/productApi.js
+
 import httpClient from "./httpClient.js";
 
 export function getProductsApi({ page = 0, size = 12, search = "" } = {}) {
@@ -16,7 +16,7 @@ export function getProductByIdApi(id) {
   return httpClient.get(`/api/products/${id}`);
 }
 
-// 🔹 NEW: admin paginated list (all products)
+// NEW: admin paginated list (all products)
 export function getAdminProductsApi(
   axiosPrivate,
   { page = 0, size = 20, search = "" } = {}

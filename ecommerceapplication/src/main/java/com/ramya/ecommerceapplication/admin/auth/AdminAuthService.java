@@ -2,7 +2,7 @@ package com.ramya.ecommerceapplication.admin.auth;
 
 import com.ramya.ecommerceapplication.auth.User;
 import com.ramya.ecommerceapplication.auth.UserRepository;
-import com.ramya.ecommerceapplication.admin.auth.Role;
+
 
 import com.ramya.ecommerceapplication.auth.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +36,7 @@ public class AdminAuthService {
         admin.setEmail(request.getEmail());
         admin.setFullName(request.getFullName());
         admin.setPassword(passwordEncoder.encode(request.getPassword()));
-        admin.setRole(Role.ADMIN);   // ✅ enum
+        admin.setRole(Role.ADMIN);   // enum
 
         userRepository.save(admin);
     }
@@ -55,7 +55,7 @@ public class AdminAuthService {
             throw new IllegalArgumentException("Invalid username or password");
         }
 
-        // ✅ use your existing JwtService methods
+        // use your existing JwtService methods
         String accessToken = jwtService.generateAccessToken(admin);
         String refreshToken = jwtService.generateRefreshToken(admin);
 

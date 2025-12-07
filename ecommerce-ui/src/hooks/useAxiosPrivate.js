@@ -1,4 +1,4 @@
-// src/hooks/useAxiosPrivate.js
+
 import { useEffect } from "react";
 import httpClient from "../api/httpClient.js"; 
 import useAuth from "./useAuth.jsx";
@@ -18,7 +18,7 @@ export default function useAxiosPrivate() {
       (error) => Promise.reject(error)
     );
 
-    // cleanup on unmount or auth change
+    
     return () => {
       httpClient.interceptors.request.eject(requestInterceptor);
     };

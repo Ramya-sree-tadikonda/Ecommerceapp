@@ -18,9 +18,9 @@ export function AuthProvider({ children }) {
     localStorage.removeItem("auth");
     setAuth(null);
 
-    // ✅ redirect to Login page after logout
+    //redirect to Login page after logout
     navigate("/login", { replace: true });
-    // React will re-render the whole tree with auth = null,
+    
     // so navbar updates and it "feels" like a refresh.
   };
 

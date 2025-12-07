@@ -1,7 +1,7 @@
-// src/api/authApi.js
+
 import httpClient from "./httpClient.js";
 
-// ---------- USER AUTH (with OTP flow) ----------
+// USER AUTH (with OTP flow)
 
 export function signupApi(payload) {
   // { fullName, email, password }
@@ -36,7 +36,7 @@ export function refreshTokenApi(refreshToken) {
   return httpClient.post("/api/auth/refresh-token", { refreshToken });
 }
 
-// ---------- ADMIN AUTH (username + password, NO OTP) ----------
+// ADMIN AUTH (username + password, NO OTP)
 
 export function adminSignupApi(data) {
   // { username, fullName, email, password }

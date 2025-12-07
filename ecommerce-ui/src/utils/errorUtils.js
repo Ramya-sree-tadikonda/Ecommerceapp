@@ -1,4 +1,4 @@
-// src/utils/errorUtils.js
+
 
 export function extractApiErrorMessage(err, fallback = "Something went wrong.") {
   if (!err) return fallback;

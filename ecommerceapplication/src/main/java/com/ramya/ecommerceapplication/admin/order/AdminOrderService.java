@@ -32,7 +32,7 @@ public class AdminOrderService {
         orderRepository.save(order);
     }
 
-    // ---- stats helpers ----
+    //  stats helpers
     public long getTotalOrders() {
         return orderRepository.count();
     }

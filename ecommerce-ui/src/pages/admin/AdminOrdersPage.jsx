@@ -1,4 +1,4 @@
-// src/pages/admin/AdminOrdersPage.jsx
+
 import { useEffect, useState } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 import {

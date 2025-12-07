@@ -1,7 +1,4 @@
 package com.ramya.ecommerceapplication.auth.dto;
-
-
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

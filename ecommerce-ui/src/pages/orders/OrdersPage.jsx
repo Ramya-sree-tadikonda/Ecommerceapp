@@ -1,4 +1,4 @@
-// src/pages/orders/OrdersPage.jsx
+
 import { useEffect, useState } from "react";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate.js";
 import { getOrdersApi } from "../../api/orderApi.js";
@@ -11,7 +11,7 @@ export default function OrdersPage() {
 
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [sortOrder, setSortOrder] = useState("NEWEST"); // NEWEST | OLDEST
+  const [sortOrder, setSortOrder] = useState("NEWEST"); 
 
   const loadOrders = async () => {
     setLoading(true);
@@ -29,10 +29,10 @@ export default function OrdersPage() {
 
   useEffect(() => {
     loadOrders();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
   }, []);
 
-  // Safely get the Date object (or null if not valid)
+  
   const getOrderDateValue = (order) => {
     const raw =
       order.createdAt ||
@@ -49,14 +49,14 @@ export default function OrdersPage() {
     return d;
   };
 
-  // Format date for display
+  
   const formatDate = (date) => {
     if (!date) return "-";
     if (Number.isNaN(date.getTime())) return "-";
-    return date.toLocaleString(); // you can customize options here
+    return date.toLocaleString(); 
   };
 
-  // Compute a friendly order title based on first item
+  
   const getOrderTitle = (order) => {
     if (order.items && order.items.length > 0) {
       const first = order.items[0];

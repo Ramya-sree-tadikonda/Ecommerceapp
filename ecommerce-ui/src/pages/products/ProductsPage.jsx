@@ -1,4 +1,4 @@
-// src/pages/catalog/ProductsPage.jsx
+
 import { useEffect, useState } from "react";
 import { getProductsApi } from "../../api/productApi.js";
 import { addToCartApi } from "../../api/cartApi.js";
