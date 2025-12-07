@@ -40,25 +40,31 @@ jobs:
         run: mvn -q -B package -DskipTests
 
   frontend-ci:
-  name: Frontend (Vite) CI
-  runs-on: ubuntu-latest
- 
-  defaults:
-    run:
-      working-directory: ./ecommerce-ui
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    - name: Set up Node
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
-        cache: npm
-    - name: Install dependencies
-      run: npm ci
-    - name: Run frontend tests
-      run: npm test -- --watch=false || echo "no tests"
-    - name: Build frontend
-      env:
-        VITE_API_BASE_URL: http://localhost:9091
-      run: npm run build
+    name: Frontend (Vite) CI
+    runs-on: ubuntu-latest
+    if: ${{ fileExists('ecommerce-ui/package-lock.json') }}
+
+    defaults:
+      run:
+        working-directory: ./ecommerce-ui
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run frontend tests
+        run: npm test -- --watch=false || echo "no tests"
+
+      - name: Build frontend
+        env:
+          VITE_API_BASE_URL: http://localhost:9091
+        run: npm run build
