@@ -1,3 +1,6 @@
+# Triggered manually to test CI
+
+
 name: Fullstack CI
 
 on:
