@@ -61,11 +61,11 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }} # e.g. ecommerce-backend
         run: |
-          IMAGE_URI=${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:latest
+          IMAGE_URI="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:latest"
+    
+          printf "Using IMAGE_URI: %q\n" "$IMAGE_URI"
 
-          echo "Building image: $IMAGE_URI"
-
-          # build from ./ecommerceapplication (because of defaults.working-directory)
+          echo "Building image..."
           docker build -t "$IMAGE_URI" .
 
           echo "Pushing image to ECR..."
