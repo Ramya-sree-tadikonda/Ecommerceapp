@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-// 👇 Ignore Hibernate proxy fields when serializing
+
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Product {
 
@@ -34,9 +34,9 @@ public class Product {
 
     private Integer stock;        // inventory quantity
 
-    // 🔥 Use Boolean so Lombok gives getActive()/setActive() and we can null-check
+
     @Column(nullable = false)
-    private Boolean active = true;     // for soft delete
+    private Boolean active = true;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -54,10 +54,9 @@ public class Product {
     }
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    @JsonIgnore   // 👈 avoid recursion Product → CartItems → Product → ...
+    @JsonIgnore
     private List<CartItem> cartItems;
 
 
 
-    // 🔥 IMPORTANT — Required for ProductServic
 }

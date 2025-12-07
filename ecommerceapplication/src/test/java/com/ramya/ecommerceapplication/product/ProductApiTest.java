@@ -1,62 +1,103 @@
 package com.ramya.ecommerceapplication.product;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Arrays;
-import java.util.List;
+import java.math.BigDecimal;
 
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.hamcrest.Matchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class ProductApiTestAlternative {
+class ProductApiTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
-    private ProductService productService;
+    @Autowired
+    private ProductRepository productRepository;
 
-    // Mock other dependent services if needed
-    // @MockBean private AnotherService anotherService;
+    @Autowired
+    private ObjectMapper objectMapper;
 
-    @Test
-    @WithMockUser(username = "testuser", roles = {"USER"})
-    void getProducts_shouldReturn200() throws Exception {
-        Product p1 = new Product(1L, "Laptop", "High-end laptop", 1500.0);
-        Product p2 = new Product(2L, "Mouse", "Wireless mouse", 25.0);
-        List<Product> products = Arrays.asList(p1, p2);
-
-        when(productService.getAllProducts()).thenReturn(products);
-
-        mockMvc.perform(get("/products")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].name", is("Laptop")))
-                .andExpect(jsonPath("$[1].name", is("Mouse")));
+    @BeforeEach
+    void setup() {
+        // Clean DB before each test
+        productRepository.deleteAll();
     }
 
     @Test
-    @WithMockUser(username = "testuser", roles = {"USER"})
-    void getProductById_shouldReturnProduct() throws Exception {
-        Product product = new Product(1L, "Laptop", "High-end laptop", 1500.0);
-        when(productService.getProductById(1L)).thenReturn(product);
+    void listProducts_returnsPageOfProducts() throws Exception {
+        // Arrange: insert 2 products into H2 test DB
+        Product p1 = Product.builder()
+                .name("Laptop")
+                .description("Gaming laptop")
+                .price(BigDecimal.valueOf(999.99))
+                .stock(10)
+                .active(true)
+                .build();
 
-        mockMvc.perform(get("/products/1")
-                        .contentType(MediaType.APPLICATION_JSON))
+        Product p2 = Product.builder()
+                .name("Phone")
+                .description("Smartphone")
+                .price(BigDecimal.valueOf(499.99))
+                .stock(20)
+                .active(true)
+                .build();
+
+        productRepository.save(p1);
+        productRepository.save(p2);
+
+        // Act + Assert
+        mockMvc.perform(
+                        get("/api/products")
+                                .param("page", "0")
+                                .param("size", "12")
+                )
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name", is("Laptop")))
-                .andExpect(jsonPath("$.price", is(1500.0)));
+                .andExpect(jsonPath("$.content.length()").value(2))
+                .andExpect(jsonPath("$.content[0].name").isNotEmpty())
+                .andExpect(jsonPath("$.content[1].name").isNotEmpty());
+    }
+
+    @Test
+    void getProductById_returnsProduct() throws Exception {
+        // Arrange: save one product and use its generated ID
+        Product saved = productRepository.save(
+                Product.builder()
+                        .name("Headphones")
+                        .description("Noise cancelling")
+                        .price(BigDecimal.valueOf(199.99))
+                        .stock(5)
+                        .active(true)
+                        .build()
+        );
+
+        Long id = saved.getId();
+
+        // Act + Assert
+        mockMvc.perform(
+                        get("/api/products/{id}", id)
+                )
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id))
+                .andExpect(jsonPath("$.name").value("Headphones"))
+                .andExpect(jsonPath("$.description").value("Noise cancelling"))
+                .andExpect(jsonPath("$.price").value(199.99));
+    }
+
+    @Test
+    void getProductById_returns404_whenNotFound() throws Exception {
+        // No product with ID 999 in fresh H2 DB
+        mockMvc.perform(
+                        get("/api/products/{id}", 999L)
+                )
+                .andExpect(status().isNotFound());
     }
 }

@@ -34,7 +34,7 @@ jobs:
             ${{ runner.os }}-m2-
 
       - name: Run unit + integration tests
-        run: mvn -q -B test
+        run: mvn -q -B test -Dspring.profiles.active=test
 
       - name: Build JAR (skip tests here to avoid duplicate)
         run: mvn -q -B package -DskipTests
