@@ -42,7 +42,7 @@ jobs:
   frontend-ci:
   name: Frontend (Vite) CI
   runs-on: ubuntu-latest
-  if: ${{ fileExists('ecommerce-ui/package-lock.json') }}
+ 
   defaults:
     run:
       working-directory: ./ecommerce-ui
